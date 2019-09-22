@@ -17,6 +17,9 @@ namespace TimeSheetApp.Models
 
         public string FirstName { get; set; }
 
-        public string LastName { get; set; } 
+        public string LastName { get; set; }
+
+        [ForeignKey(nameof(TimeClock))]
+        public TimeClock TimeClock { get; set; }
     }
 }
