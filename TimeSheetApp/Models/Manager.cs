@@ -11,6 +11,6 @@ namespace TimeSheetApp.Models
         public bool ApprovalTimeSheetStatus { get; set; }
 
         [ForeignKey(nameof(Division))]
-        public Division Division { get; set; }
+        public Division ManagerDivision { get; set; }
     }
 }

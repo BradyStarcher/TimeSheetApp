@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace TimeSheetApp.Models
 {
-    public class HR : Manager
+    public class HR : User
     {
         [ForeignKey(nameof(Division))]
         public Division Assign { get; set; }
+
+        public bool ApprovalTimeSheetStatus { get; set; }
 
         [ForeignKey(nameof(Payroll))]
         public Payroll PrintPayroll { get; set; }

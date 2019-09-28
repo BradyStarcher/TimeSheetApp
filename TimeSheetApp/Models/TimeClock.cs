@@ -11,6 +11,8 @@ namespace TimeSheetApp.Models
 
         public DateTime ClockIn { get; set; }
 
+        public DateTime Lunch { get; set; }
+
         public DateTime ClockOut { get; set; }
     }
 }
