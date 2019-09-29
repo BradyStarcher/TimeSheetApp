@@ -12,7 +12,7 @@ namespace TimeSheetApp.Models
         public int ID { get; set; }
 
         [DataType(DataType.Currency)]
-        public int Salary { get; set; }
+        public decimal Salary { get; set; }
 
         [ForeignKey(nameof(User))]
         public User Employee { get; set; }
