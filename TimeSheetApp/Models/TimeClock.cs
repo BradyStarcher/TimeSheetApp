@@ -7,11 +7,13 @@ namespace TimeSheetApp.Models
 {
     public class TimeClock
     {
-        public int ID { get; set; }
+        public Guid ID { get; set; }
 
         public DateTime ClockIn { get; set; }
 
-        public DateTime Lunch { get; set; }
+        public DateTime OutForLunch { get; set; }
+
+        public DateTime InFromLunch { get; set; }
 
         public DateTime ClockOut { get; set; }
     }

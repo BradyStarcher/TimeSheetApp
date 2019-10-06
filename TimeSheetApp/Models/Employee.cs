@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TimeSheetApp.Models
 {
-    public class HR : User
+    public class Employee : User
     {
         public int Ssn { get; set; }
 

@@ -12,13 +12,5 @@ namespace TimeSheetApp.Models
         {
 
         }
-
-        public Guid ID { get; set; }
-
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
-        
-        public TimeClock TimeClock { get; set; }
     }
 }
