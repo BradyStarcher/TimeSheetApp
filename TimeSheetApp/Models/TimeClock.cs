@@ -7,7 +7,7 @@ namespace TimeSheetApp.Models
 {
     public class TimeClock
     {
-        public Guid ID { get; set; }
+        public int ID { get; set; }
 
         public DateTime ClockIn { get; set; }
 
