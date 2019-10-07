@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,8 +13,8 @@ namespace TimeSheetApp.Models
         //[DataType(DataType.Currency)]
         public decimal Salary { get; set; }
 
-        [ForeignKey(nameof(User))]
-        public User Employee { get; set; }
+        //[ForeignKey(nameof(User))]
+        public Employee Employee { get; set; }
 
         public string Address { get; set; }
     }

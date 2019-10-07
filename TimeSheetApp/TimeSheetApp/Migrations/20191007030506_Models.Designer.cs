@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TimeSheetApp.Data;
 
-namespace TimeSheetApp.Data.Migrations
+namespace TimeSheetApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191002142402_UserUpdate")]
-    partial class UserUpdate
+    [Migration("20191007030506_Models")]
+    partial class Models
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -143,11 +143,9 @@ namespace TimeSheetApp.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128);
+                    b.Property<string>("ProviderKey");
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -178,11 +176,9 @@ namespace TimeSheetApp.Data.Migrations
                 {
                     b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(128);
+                    b.Property<string>("Name");
 
                     b.Property<string>("Value");
 
@@ -197,9 +193,13 @@ namespace TimeSheetApp.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AssignedManagerId");
+
                     b.Property<string>("Name");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("AssignedManagerId");
 
                     b.ToTable("Division");
                 });
@@ -212,13 +212,13 @@ namespace TimeSheetApp.Data.Migrations
 
                     b.Property<string>("Address");
 
-                    b.Property<decimal>("Salary");
+                    b.Property<string>("EmployeeId");
 
-                    b.Property<string>("User");
+                    b.Property<decimal>("Salary");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("User");
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Payroll");
                 });
@@ -233,7 +233,9 @@ namespace TimeSheetApp.Data.Migrations
 
                     b.Property<DateTime>("ClockOut");
 
-                    b.Property<DateTime>("Lunch");
+                    b.Property<DateTime>("InFromLunch");
+
+                    b.Property<DateTime>("OutForLunch");
 
                     b.HasKey("ID");
 
@@ -244,16 +246,6 @@ namespace TimeSheetApp.Data.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("FirstName");
-
-                    b.Property<Guid>("ID");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<int?>("TimeClockID");
-
-                    b.HasIndex("TimeClockID");
-
                     b.HasDiscriminator().HasValue("User");
                 });
 
@@ -261,15 +253,9 @@ namespace TimeSheetApp.Data.Migrations
                 {
                     b.HasBaseType("TimeSheetApp.Models.User");
 
-                    b.Property<bool>("ApprovalTimeSheetStatus");
+                    b.Property<string>("Address");
 
-                    b.Property<int?>("Division");
-
-                    b.Property<int?>("Payroll");
-
-                    b.HasIndex("Division");
-
-                    b.HasIndex("Payroll");
+                    b.Property<int>("Ssn");
 
                     b.HasDiscriminator().HasValue("HR");
                 });
@@ -278,13 +264,11 @@ namespace TimeSheetApp.Data.Migrations
                 {
                     b.HasBaseType("TimeSheetApp.Models.User");
 
-                    b.Property<bool>("ApprovalTimeSheetStatus")
-                        .HasColumnName("Manager_ApprovalTimeSheetStatus");
+                    b.Property<string>("Address")
+                        .HasColumnName("Manager_Address");
 
-                    b.Property<int?>("Division")
-                        .HasColumnName("Manager_Division");
-
-                    b.HasIndex("Division");
+                    b.Property<int>("Ssn")
+                        .HasColumnName("Manager_Ssn");
 
                     b.HasDiscriminator().HasValue("Manager");
                 });
@@ -334,36 +318,18 @@ namespace TimeSheetApp.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("TimeSheetApp.Models.Division", b =>
+                {
+                    b.HasOne("TimeSheetApp.Models.Manager", "AssignedManager")
+                        .WithMany()
+                        .HasForeignKey("AssignedManagerId");
+                });
+
             modelBuilder.Entity("TimeSheetApp.Models.Payroll", b =>
                 {
                     b.HasOne("TimeSheetApp.Models.User", "Employee")
                         .WithMany()
-                        .HasForeignKey("User");
-                });
-
-            modelBuilder.Entity("TimeSheetApp.Models.User", b =>
-                {
-                    b.HasOne("TimeSheetApp.Models.TimeClock", "TimeClock")
-                        .WithMany()
-                        .HasForeignKey("TimeClockID");
-                });
-
-            modelBuilder.Entity("TimeSheetApp.Models.HR", b =>
-                {
-                    b.HasOne("TimeSheetApp.Models.Division", "Assign")
-                        .WithMany()
-                        .HasForeignKey("Division");
-
-                    b.HasOne("TimeSheetApp.Models.Payroll", "PrintPayroll")
-                        .WithMany()
-                        .HasForeignKey("Payroll");
-                });
-
-            modelBuilder.Entity("TimeSheetApp.Models.Manager", b =>
-                {
-                    b.HasOne("TimeSheetApp.Models.Division", "ManagerDivision")
-                        .WithMany()
-                        .HasForeignKey("Division");
+                        .HasForeignKey("EmployeeId");
                 });
 #pragma warning restore 612, 618
         }
