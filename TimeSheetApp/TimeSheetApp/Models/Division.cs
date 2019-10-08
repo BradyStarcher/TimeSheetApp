@@ -11,6 +11,6 @@ namespace TimeSheetApp.Models
 
         public string Name { get; set; }
 
-        public Manager AssignedManager { get; set; }
+        public User ManagerID { get; set; }
     }
 }

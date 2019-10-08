@@ -11,10 +11,12 @@ namespace TimeSheetApp.Models
 
         public DateTime ClockIn { get; set; }
 
-        public DateTime OutForLunch { get; set; }
+        public DateTime InLunch { get; set; }
 
-        public DateTime InFromLunch { get; set; }
+        public DateTime OutLunch { get; set; }
 
         public DateTime ClockOut { get; set; }
+
+        public User EmployeeID { get; set; }
     }
 }

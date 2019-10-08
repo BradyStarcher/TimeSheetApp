@@ -12,5 +12,7 @@ namespace TimeSheetApp.Models
         {
 
         }
+
+        public Division DivisionID { get; set; }
     }
 }

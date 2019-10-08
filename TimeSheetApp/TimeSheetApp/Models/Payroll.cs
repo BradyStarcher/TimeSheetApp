@@ -10,12 +10,9 @@ namespace TimeSheetApp.Models
     {
         public int ID { get; set; }
 
-        //[DataType(DataType.Currency)]
+        
         public decimal Salary { get; set; }
 
-        //[ForeignKey(nameof(User))]
-        public Employee Employee { get; set; }
-
-        public string Address { get; set; }
+        public User EmployeeID { get; set; }
     }
 }
