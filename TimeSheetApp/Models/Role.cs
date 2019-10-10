@@ -18,9 +18,10 @@ namespace TimeSheetApp.Models
 
         }
 
-        public Role(string roleName, string description) : base(roleName)
+        public Role(string roleName, string description, string normalizedName) : base(roleName)
         {
             this.Description = description;
+            this.NormalizedName = normalizedName;
         }
 
         public string Description { get; set; }
