@@ -5,10 +5,13 @@ using System.Threading.Tasks;
 
 namespace TimeSheetApp.Models
 {
-    public class EmployeeAndManagerListViewModel
+    public class User
     {
-        public Employee[] Employees { get; set; }
+        public User() : base()
+        {
 
-        public Manager[] Managers { get; set; }
+        }
+
+        public Division DivisionID { get; set; }
     }
 }
